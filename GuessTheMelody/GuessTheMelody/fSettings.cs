@@ -41,6 +41,8 @@ namespace GuessTheMelody
                 string[] musicList = Directory.GetFiles(fbd.SelectedPath, "*.mp3", cbIncludeFolder.Checked ? SearchOption.AllDirectories:SearchOption.TopDirectoryOnly);
                 lbMusic.Items.Clear();
                 lbMusic.Items.AddRange(musicList);
+                Quiz.list.Clear();
+                Quiz.list.AddRange(musicList);
             }
         }
     }

@@ -63,9 +63,29 @@ namespace GuessTheMelody.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _40603 {
+            get {
+                object obj = ResourceManager.GetObject("40603", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _45472 {
             get {
                 object obj = ResourceManager.GetObject("45472", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap f14bdc8b8e05d3e6cce99cf55165030a {
+            get {
+                object obj = ResourceManager.GetObject("f14bdc8b8e05d3e6cce99cf55165030a", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
