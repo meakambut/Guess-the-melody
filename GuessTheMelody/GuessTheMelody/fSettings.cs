@@ -20,11 +20,15 @@ namespace GuessTheMelody
 
         private void fSettings_Load(object sender, EventArgs e)
         {
-
+            Quiz.GetSettings();
+            string[] musicList = Directory.GetFiles(Quiz.LastFolder, "*.mp3", Quiz.IncludeFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+            lbMusic.Items.Clear();
+            lbMusic.Items.AddRange(musicList);
         }
 
         private void btnOkSettings_Click(object sender, EventArgs e)
         {
+            Quiz.SaveSettings();
             this.Hide();
         }
 
@@ -38,11 +42,14 @@ namespace GuessTheMelody
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if(fbd.ShowDialog() == DialogResult.OK);
             {
-                string[] musicList = Directory.GetFiles(fbd.SelectedPath, "*.mp3", cbIncludeFolder.Checked ? SearchOption.AllDirectories:SearchOption.TopDirectoryOnly);
+                Quiz.IncludeFolders = cbIncludeFolder.Checked;
+                Quiz.LastFolder = fbd.SelectedPath;
+                string[] musicList = Directory.GetFiles(Quiz.LastFolder, "*.mp3", Quiz.IncludeFolders ? SearchOption.AllDirectories:SearchOption.TopDirectoryOnly);
                 lbMusic.Items.Clear();
                 lbMusic.Items.AddRange(musicList);
                 Quiz.list.Clear();
                 Quiz.list.AddRange(musicList);
+                Quiz.LastFolder = fbd.SelectedPath;
             }
         }
     }
