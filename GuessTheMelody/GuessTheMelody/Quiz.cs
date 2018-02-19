@@ -20,9 +20,15 @@ namespace GuessTheMelody
 
         static public void ReadMusic()
         {
-            string[] musicList = Directory.GetFiles(LastFolder, "*.mp3", IncludeFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
-            list.Clear();
-            list.AddRange(musicList);
+            try
+            {
+                string[] musicList = Directory.GetFiles(LastFolder, "*.mp3", IncludeFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+                list.Clear();
+                list.AddRange(musicList);
+            }
+            catch
+            {
+            }
         }
 
         static string RegKeyName = "Software\\meakambut\\GuessMelody";

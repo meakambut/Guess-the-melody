@@ -20,37 +20,51 @@ namespace GuessTheMelody
 
         private void fSettings_Load(object sender, EventArgs e)
         {
-            Quiz.GetSettings();
-            string[] musicList = Directory.GetFiles(Quiz.LastFolder, "*.mp3", Quiz.IncludeFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+            cbIncludeFolder.Checked = Quiz.IncludeFolders;
+            cbRandomStart.Checked = Quiz.RandonStart;
+            cbGameDuration.Text = Convert.ToString(Quiz.GameDuration);
+            cbMusicDuration.Text = Convert.ToString(Quiz.MusicDuration);
+            //string[] musicList = Directory.GetFiles(Quiz.LastFolder, "*.mp3", Quiz.IncludeFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
             lbMusic.Items.Clear();
-            lbMusic.Items.AddRange(musicList);
+            lbMusic.Items.AddRange(Quiz.list.ToArray());
         }
 
         private void btnOkSettings_Click(object sender, EventArgs e)
         {
+            Quiz.IncludeFolders = cbIncludeFolder.Checked;
+            Quiz.GameDuration = Convert.ToInt32(cbGameDuration.Text);
+            Quiz.MusicDuration = Convert.ToInt32(cbMusicDuration.Text);
+            Quiz.RandonStart = cbRandomStart.Checked;
             Quiz.SaveSettings();
             this.Hide();
         }
 
         private void btnCancelSettings_Click(object sender, EventArgs e)
         {
+            cbIncludeFolder.Checked = Quiz.IncludeFolders;
+            cbRandomStart.Checked = Quiz.RandonStart;
+            cbGameDuration.Text = Convert.ToString(Quiz.GameDuration);
+            cbMusicDuration.Text = Convert.ToString(Quiz.MusicDuration);
             this.Hide();
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
-            if(fbd.ShowDialog() == DialogResult.OK);
+            if(fbd.ShowDialog() == DialogResult.OK)
             {
-                Quiz.IncludeFolders = cbIncludeFolder.Checked;
-                Quiz.LastFolder = fbd.SelectedPath;
-                string[] musicList = Directory.GetFiles(Quiz.LastFolder, "*.mp3", Quiz.IncludeFolders ? SearchOption.AllDirectories:SearchOption.TopDirectoryOnly);
+                string[] musicList = Directory.GetFiles(fbd.SelectedPath, "*.mp3", cbIncludeFolder.Checked ? SearchOption.AllDirectories:SearchOption.TopDirectoryOnly);
                 lbMusic.Items.Clear();
                 lbMusic.Items.AddRange(musicList);
+                Quiz.LastFolder = fbd.SelectedPath;
                 Quiz.list.Clear();
                 Quiz.list.AddRange(musicList);
-                Quiz.LastFolder = fbd.SelectedPath;
             }
+        }
+
+        private void btnClearList_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

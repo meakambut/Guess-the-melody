@@ -34,5 +34,11 @@ namespace GuessTheMelody
         {
             fG.ShowDialog();
         }
+
+        private void fMain_Load(object sender, EventArgs e)
+        {
+            Quiz.GetSettings();
+            Quiz.ReadMusic();
+        }
     }
 }
