@@ -42,6 +42,8 @@
             this.lblSongsLeft = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblTimeLeft = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.WMP)).BeginInit();
             this.SuspendLayout();
             // 
@@ -175,6 +177,30 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.LavenderBlush;
+            this.label4.Font = new System.Drawing.Font("Segoe Print", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label4.Location = new System.Drawing.Point(533, 360);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(90, 28);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Time left:";
+            // 
+            // lblTimeLeft
+            // 
+            this.lblTimeLeft.AutoSize = true;
+            this.lblTimeLeft.BackColor = System.Drawing.Color.LavenderBlush;
+            this.lblTimeLeft.Font = new System.Drawing.Font("Segoe Print", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTimeLeft.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblTimeLeft.Location = new System.Drawing.Point(629, 360);
+            this.lblTimeLeft.Name = "lblTimeLeft";
+            this.lblTimeLeft.Size = new System.Drawing.Size(24, 28);
+            this.lblTimeLeft.TabIndex = 12;
+            this.lblTimeLeft.Text = "0";
+            // 
             // fGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -183,6 +209,8 @@
             this.BackgroundImage = global::GuessTheMelody.Properties.Resources.f14bdc8b8e05d3e6cce99cf55165030a;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(680, 425);
+            this.Controls.Add(this.lblTimeLeft);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.lblSongsLeft);
             this.Controls.Add(this.label3);
@@ -196,10 +224,12 @@
             this.Controls.Add(this.WMP);
             this.ForeColor = System.Drawing.Color.Purple;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "fGame";
             this.Text = "Game";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fGame_FormClosed);
             this.Load += new System.EventHandler(this.fGame_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fGame_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.WMP)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -220,5 +250,7 @@
         private System.Windows.Forms.Label lblSongsLeft;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblTimeLeft;
     }
 }
