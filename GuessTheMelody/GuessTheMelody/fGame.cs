@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
+using System.Media;
 
 namespace GuessTheMelody
 {
@@ -126,19 +127,34 @@ namespace GuessTheMelody
             if(e.KeyData == Keys.Z)
             {
                 PauseGame();
-                if(MessageBox.Show("Was the answer right?","Player 1", MessageBoxButtons.YesNo)==DialogResult.Yes)
+                fMessage fm = new fMessage();
+                SoundPlayer sp1 = new SoundPlayer("Resources\\1.wav");
+                sp1.Play();
+                fm.lblMessage.Text = "Player 1";       
+                if(fm.ShowDialog()==DialogResult.Yes)
                 {
-                    lblScore1.Text = Convert.ToString(Convert.ToInt32(lblScore1.Text)+1);
+                    lblScore1.Text = Convert.ToString(Convert.ToInt32(lblScore1.Text) + 1);
                 }
             }
             if (e.KeyData == Keys.P)
             {
                 PauseGame();
-                if (MessageBox.Show("Was the answer right?", "Player 2", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                fMessage fm = new fMessage();
+                SoundPlayer sp2 = new SoundPlayer("Resources\\2.wav");
+                sp2.Play();
+                fm.lblMessage.Text = "Player 2";
+                if (fm.ShowDialog() == DialogResult.No)
                 {
-                    lblScore2.Text = Convert.ToString(Convert.ToInt32(lblScore2.Text) + 1);
+                    lblScore2.Text = Convert.ToString(Convert.ToInt32(lblScore2.Text));
                 }
             }
+        }
+
+        private void WMP_OpenStateChange(object sender, AxWMPLib._WMPOCXEvents_OpenStateChangeEvent e)
+        {
+            if (Quiz.RandonStart)
+                if (WMP.openState == WMPLib.WMPOpenState.wmposMediaOpen)
+                    WMP.Ctlcontrols.currentPosition = rand.Next(0, (int)WMP.currentMedia.duration - Quiz.MusicDuration);
         }
     }
 }
