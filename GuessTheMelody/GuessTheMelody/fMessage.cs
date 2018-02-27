@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
+using TagLib;
 
 namespace GuessTheMelody
 {
@@ -41,6 +42,12 @@ namespace GuessTheMelody
         private void fMessage_FormClosed(object sender, FormClosedEventArgs e)
         {
             timer1.Stop();
+        }
+
+        private void lblShowAnswer_Click(object sender, EventArgs e)
+        {
+            var audioFile = TagLib.File.Create(Quiz.answer);
+            lblShowAnswer.Text = audioFile.Tag.JoinedPerformers + ", " + audioFile.Tag.Title;
         }
     }
 }

@@ -8,6 +8,7 @@ namespace GuessTheMelody
     public partial class fGame : Form
     {
         Random rand = new Random();
+        bool[] players = new bool[2];
         public fGame()
         {
             InitializeComponent();
@@ -19,9 +20,12 @@ namespace GuessTheMelody
             {
                 int n = rand.Next(0, Quiz.list.Count);
                 WMP.URL = Quiz.list[n];
+                Quiz.answer = (WMP.URL);
                 Quiz.list.RemoveAt(n);
                 lblSongsLeft.Text = Convert.ToString(Quiz.list.Count);
                 timer1.Start();
+                players[0] = false;
+                players[1] = false;
             }
             else
             {
@@ -33,11 +37,6 @@ namespace GuessTheMelody
         {
             progressBar.Value = progressBar.Maximum;
             PlayMusic();
-        }
-
-        private void lblScore1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void fGame_FormClosed(object sender, FormClosedEventArgs e)
@@ -105,14 +104,9 @@ namespace GuessTheMelody
             ResumeGame();
         }
 
-        private void progressBar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void PauseGame()
         {
-            WMP.Ctlcontrols.stop();
+            WMP.Ctlcontrols.pause();
             timer1.Stop();
         }
 
@@ -124,8 +118,11 @@ namespace GuessTheMelody
 
         private void fGame_KeyDown(object sender, KeyEventArgs e)
         {
+            if (!timer1.Enabled) return;
             if(e.KeyData == Keys.Z)
             {
+                if (players[0]) return;
+                players[0] = true;
                 PauseGame();
                 fMessage fm = new fMessage();
                 SoundPlayer sp1 = new SoundPlayer("Resources\\1.wav");
@@ -134,19 +131,25 @@ namespace GuessTheMelody
                 if(fm.ShowDialog()==DialogResult.Yes)
                 {
                     lblScore1.Text = Convert.ToString(Convert.ToInt32(lblScore1.Text) + 1);
+                    return;
                 }
+                ResumeGame();
             }
             if (e.KeyData == Keys.P)
             {
+                if (players[1]) return;
+                players[1] = true;
                 PauseGame();
                 fMessage fm = new fMessage();
                 SoundPlayer sp2 = new SoundPlayer("Resources\\2.wav");
                 sp2.Play();
                 fm.lblMessage.Text = "Player 2";
-                if (fm.ShowDialog() == DialogResult.No)
+                if (fm.ShowDialog() == DialogResult.Yes)
                 {
-                    lblScore2.Text = Convert.ToString(Convert.ToInt32(lblScore2.Text));
+                    lblScore2.Text = Convert.ToString(Convert.ToInt32(lblScore2.Text)+1);
+                    return;
                 }
+                ResumeGame();
             }
         }
 
@@ -155,6 +158,18 @@ namespace GuessTheMelody
             if (Quiz.RandonStart)
                 if (WMP.openState == WMPLib.WMPOpenState.wmposMediaOpen)
                     WMP.Ctlcontrols.currentPosition = rand.Next(0, (int)WMP.currentMedia.duration - Quiz.MusicDuration);
+        }
+
+        private void lblScore1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left) (sender as Label).Text = Convert.ToString(Convert.ToInt32((sender as Label).Text)+1);
+            if (e.Button == MouseButtons.Right) (sender as Label).Text = Convert.ToString(Convert.ToInt32((sender as Label).Text)-1);
+
+        }
+
+        private void lblScore2_MouseClick(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

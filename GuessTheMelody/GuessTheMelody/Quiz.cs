@@ -18,6 +18,7 @@ namespace GuessTheMelody
         static public string LastFolder = "";
         static public bool   IncludeFolders = false;
         static public int    CurrentGameDuration = 0;
+        static public string answer = "";
 
         static public void ReadMusic()
         {

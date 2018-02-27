@@ -34,6 +34,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblTimer = new System.Windows.Forms.Label();
+            this.lblShowAnswer = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblMessage
@@ -90,12 +91,25 @@
             this.lblTimer.TabIndex = 3;
             this.lblTimer.Text = "0";
             // 
+            // lblShowAnswer
+            // 
+            this.lblShowAnswer.AutoSize = true;
+            this.lblShowAnswer.Font = new System.Drawing.Font("Segoe Print", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblShowAnswer.ForeColor = System.Drawing.Color.DarkBlue;
+            this.lblShowAnswer.Location = new System.Drawing.Point(13, 346);
+            this.lblShowAnswer.Name = "lblShowAnswer";
+            this.lblShowAnswer.Size = new System.Drawing.Size(150, 28);
+            this.lblShowAnswer.TabIndex = 4;
+            this.lblShowAnswer.Text = "Show the answer";
+            this.lblShowAnswer.Click += new System.EventHandler(this.lblShowAnswer_Click);
+            // 
             // fMessage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LavenderBlush;
             this.ClientSize = new System.Drawing.Size(532, 378);
+            this.Controls.Add(this.lblShowAnswer);
             this.Controls.Add(this.lblTimer);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -116,5 +130,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label lblTimer;
+        private System.Windows.Forms.Label lblShowAnswer;
     }
 }

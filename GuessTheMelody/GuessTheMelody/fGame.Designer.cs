@@ -102,7 +102,7 @@
             this.lblScore1.Size = new System.Drawing.Size(45, 51);
             this.lblScore1.TabIndex = 4;
             this.lblScore1.Text = "0";
-            this.lblScore1.Click += new System.EventHandler(this.lblScore1_Click);
+            this.lblScore1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblScore1_MouseClick);
             // 
             // lblScore2
             // 
@@ -114,6 +114,7 @@
             this.lblScore2.Size = new System.Drawing.Size(45, 51);
             this.lblScore2.TabIndex = 5;
             this.lblScore2.Text = "0";
+            this.lblScore2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblScore1_MouseClick);
             // 
             // btnPause
             // 
@@ -171,7 +172,6 @@
             this.progressBar.Step = 100;
             this.progressBar.TabIndex = 10;
             this.progressBar.Value = 100;
-            this.progressBar.Click += new System.EventHandler(this.progressBar_Click);
             // 
             // timer1
             // 
